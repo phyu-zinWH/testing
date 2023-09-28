@@ -4,10 +4,10 @@
     <main class="content">
         <div class="container-fluid p-0">
 
-            <h1 class="h3 mb-3"><strong>Customer</strong> Information</h1>
+            <h1 class="h3 mb-3"><strong>Item</strong> Information</h1>
             <div class="row">
                 <div class="col-md-2 ms-auto">
-                    <a href="{{route('customer.create')}}" class="btn btn-dark float-left ">Add New Customer</a>
+                    <a href="{{route('item.create')}}" class="btn btn-dark float-left ">Add New Item</a>
                 </div>
             </div>
 
@@ -18,8 +18,12 @@
                             <tr>
                                 <th>No</th>
                                 <th>Name</th>
-                                <th>Phone</th>
-                                <th>Address</th>
+                                <th>Item Code</th>
+                                <th>Price</th>
+                                <th>kyat</th>
+                                <th>Yway</th>
+                                <th>Description</th>
+                                <th>Image</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -27,18 +31,22 @@
                         <tbody>
                             
 
-                            @foreach ($customers as $customer)
-                            <form action="{{route('customer.destroy',$customer->id)}}" method="post">
+                            @foreach ($items as $item)
+                            <form action="{{route('item.destroy',$item->id)}}" method="post">
                                 @csrf
                                 @method('delete')
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{$customer->name}}</td>
-                                    <td>{{$customer->phone}}</td>
-                                    <td>{{$customer->address}}</td>
+                                    <td>{{$item->name}}</td>
+                                    <td>{{$item->item_code}}</td>
+                                    <td>{{$item->price}}</td>
+                                    <td>{{$item->kyat}}</td>
+                                    <td>{{$item->yway}}</td>
+                                    <td>{{$item->description}}</td>
+                                    <td>{{$item->image}}</td>
                                     
-                                    <td><a href="{{route('customer.show',$customer->id)}}" class="btn btn-success mx-2">View</a>
-                                    <a href="{{route('customer.edit',$customer->id)}}" class="btn btn-warning mx-2">Edit</a>
+                                    <td><a href="{{route('item.show',$item->id)}}" class="btn btn-success mx-2">View</a>
+                                    <a href="{{route('item.edit',$item->id)}}" class="btn btn-warning mx-2">Edit</a>
                                     <button href="" class="btn btn-danger" type="submit" onclick="return(confirm('Are you sure?'))">Delete</button>
                                 </td>
                                 </tr>

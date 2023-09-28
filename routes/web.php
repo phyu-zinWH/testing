@@ -22,6 +22,12 @@ Route::get('/', function () {
 Route::group(['namespace' => 'App\Http\Controllers'],function(){
 
        // coustomer
-       Route::resource('/customer', CustomerController   ::class);
+       Route::resource('/customer', CustomerController::class);
+
+       // item
+       Route::resource('/item', ItemController::class);
+
+       // Customer Order
+       Route::resource('/customer_order', CustomerOrderCOntroller::class);
 
 });

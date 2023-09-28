@@ -11,7 +11,7 @@ class ItemRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,12 @@ class ItemRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
-        ];
+            'name' => 'required',
+            'item_code' => 'required',
+            'description' => 'required',      
+            'price' => 'required',      
+            'kyat' => 'required',      
+            'yway' => 'required',     
+          ];
     }
 }

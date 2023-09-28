@@ -2,16 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use Illuminate\Http\Request;
+use App\Http\Requests\CustomerRequest;
 
 class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    protected $customer;
+    public function __construct(Customer $customer)
+    {
+        $this->customer = $customer;
+    }
     public function index()
     {
-        return view('customer.index');
+        $customers = $this->customer->all();
+        return view('customer.index',compact('customers'));
     }
 
     /**
@@ -20,13 +28,13 @@ class CustomerController extends Controller
     public function create()
     {
         //
+        return view('customer.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(CustomerRequest $request)
     {
+        $this->customer->create($request->all());
+        return redirect()->route('customer.index');
         //
     }
 
@@ -35,7 +43,9 @@ class CustomerController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $customer = $this->customer->find($id);
+
+        return view('customer.view',compact('customer'));
     }
 
     /**
@@ -43,22 +53,27 @@ class CustomerController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $customer = $this->customer->find($id);
+        return view('customer.edit',compact('customer'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CustomerRequest $request, string $id)
     {
-        //
+        $customer = $this->customer->find($id);
+        $customer->update($request->all());
+        return redirect()->route('customer.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $customer = $this->customer->find($id);
+        $customer->delete();
+        return redirect()->route('customer.index');
     }
 }
